@@ -19,7 +19,7 @@ public:
 	float mass;
 	float drag;
 	
-	Particle(Vector2d postion,float mass = 1, float drag = 0.3f);
+	Particle(Vector2d postion, float mass = 1, float drag = 0.3f, float r = 0.f);
 	void Update(float dt);
 	void addForce(Vector2d force);
 };

@@ -30,6 +30,12 @@
     <ClCompile Include="Vector2d.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="SATCollider.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AABBCollider.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicsWorld.h">

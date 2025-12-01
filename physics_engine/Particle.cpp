@@ -1,10 +1,12 @@
 #include "Particle.h"
 
-Particle::Particle(Vector2d postion, float mass, float drag)
+Particle::Particle(Vector2d postion, float mass, float drag, float r)
 {
 	this->postion= postion;
 	this->mass = mass;
 	this->drag = drag;
+	this->collider = Collider();
+	this->collider.r = r;
 
 	this->velocity = Vector2d(0, 0);
 	this->acceleration = Vector2d(0, 0);
@@ -13,21 +15,22 @@ Particle::Particle(Vector2d postion, float mass, float drag)
 
 void Particle::Update(float dt)
 {
-	cout << "Force: " << forces.x << ", " << forces.y << endl;
+	collider.center = postion;
+
+	/*cout << "Force: " << forces.x << ", " << forces.y << endl;
 	cout << "Velocity: " << velocity.x << ", " << velocity.y << endl;
-	cout << "Position: " << postion.x << ", " << postion.y << endl;
+	cout << "Position: " << postion.x << ", " << postion.y << endl;*/
 
-	if (velocity.getMagnitude() > 0) {
-		Vector2d vNorm = velocity.getNormalized();
-		float speed = velocity.getMagnitude();
-		Vector2d dragForce = -0.5f * drag * speed * speed * vNorm;
-		forces += dragForce;
-	}
+	acceleration = forces * (1.0f / mass);
 
+	float damping = 1.0f - drag * dt;
+	if (damping < 0.0f) damping = 0.0f;
 
-	acceleration = forces * (1.f / mass);
-	velocity += dt * acceleration;
-	postion += dt * velocity;
+	velocity *= damping;
+
+	velocity += acceleration * dt;
+
+	postion += velocity * dt;
 
 	forces = Vector2d(0.f, 0.f);
 }

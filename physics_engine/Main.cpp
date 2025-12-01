@@ -7,11 +7,11 @@ using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
-    CircleShape c1(40);
-    CircleShape c2(30);
-    c1.setOrigin(40, 40); 
-    c2.setOrigin(30, 30);
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
+    CircleShape c1(30);
+    CircleShape c2(50);
+    c1.setOrigin(30, 30); 
+    c2.setOrigin(50, 50);
 	c1.setFillColor(sf::Color::Green);
 	c2.setFillColor(sf::Color::Cyan);
 
@@ -21,9 +21,12 @@ int main()
     renderer.AddDrawable(&c1);
     renderer.AddDrawable(&c2);
 
-	Particle p1(Vector2d(100.f, 100.f), 2.f, 0.1f);
-	Particle p2(Vector2d(400.f, 100.f), 1.f, 0.1f);
+	Particle p1(Vector2d(200.f, 50.f), 1.f, 0.1f,c1.getRadius());
+	Particle p2(Vector2d(700.f, 50.f), 1.f, 0.1f,c2.getRadius());
 	//particle.addForce(Vector2d(1000.f, 1000.f));
+   
+    p1.velocity = Vector2d(200, 100);
+    p2.velocity = Vector2d(-200, 100);
 
 	physicsWorld.addParticle(&p1);
 	physicsWorld.addParticle(&p2);
@@ -34,9 +37,7 @@ int main()
 
     while (window.isOpen())
     {
-        if (clock.getElapsedTime().asSeconds() >= 0.008f) {
-            dt = clock.restart().asSeconds();
-        }
+        dt = clock.restart().asSeconds();
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -44,10 +45,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
         // Apply force every frame
-        p1.addForce(Vector2d(100.f, 100.f));
-        p2.addForce(Vector2d(-100.f, 100.f));
+        //p1.addForce(Vector2d(100.f, 100.f));
+        //p2.addForce(Vector2d(-100.f, 100.f));
 
         physicsWorld.Update(dt);
         c1.setPosition(p1.postion.x, p1.postion.y);

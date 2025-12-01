@@ -129,10 +129,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABBCollider.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="PhysicsWorld.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SATCollider.cpp" />
     <ClCompile Include="Vector2d.cpp" />
   </ItemGroup>
   <ItemGroup>
